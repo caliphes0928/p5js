@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    
+    <script>
+    var score;
+    var numbers = [0,200,400,600];
+    var start = false;
+    var score;
+    var picker;
+    var times;
+    var mili;
+        function setup() {
+            createCanvas(600,600);
+            textSize(25);
+            text("Tap the coin to start", 280,300);
+            picker = floor(random(1,9));
+            mili=millis()+1500;
+        }
+
+        function draw() {
+            if(score==-3){
+                GameOver();
+            }
+            if(score == 9){
+                Win();
+            }
+            if(start==true){
+                    if(mili>= millis()){
+                        if(picker==1){
+                            
+                            rect(0,0,200,200);
+                        }else if(picker==2){
+                            rect(200,0,200,200);
+                        }else if(picker==3){
+                            rect(400,0,200,200);
+                        }else if(picker==4){
+                            rect(0,200,200,200);
+                        }else if(picker==5){
+                            rect(200,200,200,200);
+                        }else if(picker==6){
+                            rect(200,400,200,200);
+                        }else if(picker==7){
+                            rect(0,400,200,200);
+                        }else if(picker==8){
+                            rect(200,400,200,200);
+                        }else if(picker==9){
+                            rect(400,400,200,200);
+                        }
+                        textSize(25);
+                        stroke(255,255,0);
+                        text("Score: "+score,30,50)
+                        fill(0);
+                        noStroke();
+                    }else{
+                        picker=floor(random(1,9));
+                        grid(0,200,400,600);
+                        stroke(255,255,0);
+                        score--;
+                        text("Score: "+score,30,50);
+                        noStroke();
+                    }
+            }
+            console.log(mili);
+        }
+        function grid(x1,x2,x3,x4){
+            clear();
+            stroke(0);
+            strokeWeight(10);
+            line(x1,x2,x4,x2);
+            line(x2,x1,x2,x4);
+            line(x1,x3,x4,x3);
+            line(x3,x1,x3,x4);
+            mili = millis()+1500;
+        }
+        function GameOver(){
+            start = false;
+            background(255,0,0);
+            textSize(40);
+            noStroke();
+            text("Game Over!",240,300);
+            textSize(20);
+            text("Tap the coin to play again",250,500)
+        }
+        function Win(){
+            start = false;
+            background(0,255,0);
+            textSize(40);
+            noStroke();
+            text("You Win!",240,300);
+            textSize(20);
+            text("Tap the coin to play again",250,500)
+        }
+        function mousePressed(){
+            if(start == false){
+                background(255);
+                picker = floor(random(1,9));
+                grid(0,200,400,600);
+                score = 0;
+                start = true;
+            }
+            
+        }
+       function keyPressed(){
+           if(start==true){
+               if(keyCode==87){
+                  if(picker==1){//w
+                       reset();
+                   }else{
+                       GameOver();
+                   }
+               }else if(keyCode==65){//a
+                   if(picker==2){
+                       reset();
+                   }else{
+                       GameOver();
+                   }
+               }else if(keyCode==83){//s
+                   if(picker==3){
+                       reset();
+                   }else{
+                       GameOver();
+                   }
+                   
+                }else if(keyCode==68){//d
+                   if(picker==4){
+                       reset();
+                   }else{
+                       GameOver();
+                   }
+               }else if(keyCode==70){//f
+                   if(picker==5){
+                       reset();
+                   }else{
+                       GameOver();
+                   }
+               }else if(keyCode==39){
+                    //right arrow
+                   if(picker==6){
+                       reset();
+                   }else{
+                       GameOver();
+                   }
+               }else if(keyCode==40){
+                   //down arrow
+                   if(picker==7){
+                       reset();
+                   }else{
+                       GameOver();
+                   }
+               }else if(keyCode==38){
+                   //up arrow
+                   if(picker==8){
+                       reset();
+                   }else{
+                       GameOver();
+                   }
+               }else if(keyCode==37){
+                   //left arrow
+                   if(picker==9){
+                       reset();
+                   }else{
+                       GameOver();
+                   }
+               }
+            }
+            function reset(){
+                score++;
+                picker=floor(random(1,9));
+                grid(0,200,400,600);
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
